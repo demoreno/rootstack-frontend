@@ -1,23 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Form, Button } from 'react-bootstrap';
 import HomePropTypes from '../../proptypes/Home.proptypes';
 import Header from '../../components/Header';
+import UserForm from '../../components/UserForm';
+import BarbecueForm from '../../components/BarbecueForm';
 import './index.scss';
 
 class Home extends Component {
   state = {
     isOpen: false,
-    value: 1,
+    typeForm: null,
   };
 
-  handle(event) {
+  handleButton(typeForm) {
     this.setState({
-      value: event.target.value,
+      typeForm,
     });
   }
 
   render() {
-    return <Header />;
+    const { typeForm } = this.state;
+    return [
+      <Header />,
+      <div className="app-container">
+        <Form inline>
+          <Button
+            variant="outline-success"
+            onClick={() => this.handleButton('register')}
+          >
+            Register
+          </Button>
+          <Button
+            variant="outline-success"
+            onClick={() => this.handleButton('barbecue')}
+          >
+            Barbecue
+          </Button>
+        </Form>
+        ,
+        <div className="form-container">
+          {typeForm === 'register' && <UserForm />}
+          {typeForm === 'barbecue' && <BarbecueForm />}
+        </div>
+        ,
+      </div>,
+    ];
   }
 }
 

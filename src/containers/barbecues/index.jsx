@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { getBarbecues } from '../../actions/Barbecue';
 import Header from '../../components/Header';
 
-export default class Barbecues extends Component {
+class Barbecues extends Component {
+  componentDidMount() {
+    this.props.getBarbecues();
+  }
+
   render() {
     return (
       <div>
@@ -64,3 +70,16 @@ export default class Barbecues extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    tweets: state.items,
+  };
+};
+
+const mapDispatchToProps = { getBarbecues };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Barbecues);

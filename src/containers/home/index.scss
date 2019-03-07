@@ -1,7 +1,9 @@
-.home-container {
-  .container-columns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.app-container {
+  padding: 40px;
+
+  .form-container {
+    margin: 0 auto;
+    width: 50%;
+    padding: 20px;
   }
 }
