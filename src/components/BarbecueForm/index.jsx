@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { addBarbecue } from '../../actions/Barbecue';
+import { initialState } from '../../reducers/Barbecue';
 
 class BarbecueForm extends Component {
+  state = {
+    initialState,
+  };
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -11,16 +16,20 @@ class BarbecueForm extends Component {
   }
 
   submitForm() {
-    console.log('submit');
-    const { name, model, description } = this.state;
+    const { name, model, description, latitude, longitude } = this.state;
     this.props.addBarbecue({
       name,
       model,
       description,
+      latitude,
+      longitude,
     });
+    this.setState(initialState);
   }
 
   render() {
+    const { name, model, description, latitude, longitude } = this.state;
+
     return (
       <Form>
         <Form.Group controlId="formBasicPassword">
@@ -28,6 +37,7 @@ class BarbecueForm extends Component {
           <Form.Control
             name="name"
             placeholder="Nombre"
+            value={name}
             onChange={e => this.handleChange(e)}
           />
         </Form.Group>
@@ -36,6 +46,7 @@ class BarbecueForm extends Component {
           <Form.Label>Modelo</Form.Label>
           <Form.Control
             name="model"
+            value={model}
             placeholder="Modelo"
             onChange={e => this.handleChange(e)}
           />
@@ -44,8 +55,29 @@ class BarbecueForm extends Component {
         <Form.Group controlId="formBasicZip">
           <Form.Label>Descripción</Form.Label>
           <Form.Control
+            value={description}
             name="decription"
             placeholder="Descripción"
+            onChange={e => this.handleChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicZip">
+          <Form.Label>Latitud</Form.Label>
+          <Form.Control
+            name="latitude"
+            value={latitude}
+            placeholder="Latitud"
+            onChange={e => this.handleChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicZip">
+          <Form.Label>Longitud</Form.Label>
+          <Form.Control
+            name="longitude"
+            value={longitude}
+            placeholder="Longitud"
             onChange={e => this.handleChange(e)}
           />
         </Form.Group>

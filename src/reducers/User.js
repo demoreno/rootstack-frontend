@@ -1,10 +1,13 @@
-import { ACTIONS } from '../actions/User';
+import {
+  ACTIONS
+} from '../actions/User';
 
-const initialState = {
+export const initialState = {
   firstName: '',
   lastName: '',
   zipCode: '',
   email: '',
+  userData: []
 };
 
 const User = (state = initialState, action) => {
@@ -12,6 +15,16 @@ const User = (state = initialState, action) => {
     case ACTIONS.REGISTER_USER:
       return {
         ...state,
+      };
+    case ACTIONS.LOGIN:
+      return {
+        ...state,
+        userData: action.payload
+      };
+    case ACTIONS.LOGOUT:
+      return {
+        ...state,
+        userData: []
       };
     default:
       return state;

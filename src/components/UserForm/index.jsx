@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { addUser } from '../../actions/User';
+import { initialState } from '../../reducers/User';
 
 class UserForm extends Component {
+  state = {
+    initialState,
+  };
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logout } from '../../actions/User';
+
 class Header extends Component {
-  renderAlert() {
-    const { alert } = this.props;
-
-    return setTimeout(
-      <Alert variant={alert.type}>{alert.message}</Alert>,
-      5000,
-    );
-  }
-
   render() {
     const { alert } = this.props;
+    const token = localStorage.getItem('token');
+
     return [
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">Rootstack Barbecue</Navbar.Brand>
@@ -22,10 +17,11 @@ class Header extends Component {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/barbecues">Barbecues</Nav.Link>
             <Nav.Link href="/my-barbecues">My Barbecues</Nav.Link>
+            {token && <Nav.Link onClick={this.props.logout}>Logout</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>,
-      <div>{alert && this.renderAlert}</div>,
+      <div>{alert && <Alert variant={alert.type}>{alert.message}</Alert>}</div>,
     ];
   }
 }
@@ -36,7 +32,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { logout };
 
 export default connect(
   mapStateToProps,

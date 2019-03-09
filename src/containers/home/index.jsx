@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
-import HomePropTypes from '../../proptypes/Home.proptypes';
 import Header from '../../components/Header';
 import UserForm from '../../components/UserForm';
 import BarbecueForm from '../../components/BarbecueForm';
+import LoginForm from '../../components/LoginForm';
 import { setPosition } from '../../actions/Global';
 import './index.scss';
 
@@ -30,38 +30,46 @@ class Home extends Component {
 
   render() {
     const { typeForm } = this.state;
+    const token = localStorage.getItem('token');
     return [
       <Header />,
       <div className="app-container">
         <Form inline>
-          <Button
-            variant="outline-success"
-            onClick={() => this.handleButton('register')}
-          >
-            Register
-          </Button>
-          <Button
-            variant="outline-success"
-            onClick={() => this.handleButton('barbecue')}
-          >
-            Barbecue
-          </Button>
+          {!token && [
+            <Button
+              variant="outline-success"
+              onClick={() => this.handleButton('register')}
+            >
+              SignUp
+            </Button>,
+            <Button
+              variant="outline-success"
+              onClick={() => this.handleButton('login')}
+            >
+              Login
+            </Button>,
+          ]}
+          {token && [
+            <Button
+              variant="outline-success"
+              onClick={() => this.handleButton('barbecue')}
+            >
+              Barbecue
+            </Button>,
+          ]}
         </Form>
         <div className="form-container">
           {typeForm === 'register' && <UserForm />}
           {typeForm === 'barbecue' && <BarbecueForm />}
+          {typeForm === 'login' && <LoginForm />}
         </div>
       </div>,
     ];
   }
 }
 
-Home.propTypes = HomePropTypes;
-
 const mapStateToProps = state => {
-  return {
-    tweets: state.items,
-  };
+  return {};
 };
 
 const mapDispatchToProps = { setPosition };

@@ -1,9 +1,14 @@
-import { ACTIONS } from '../actions/Barbecue';
+import {
+  ACTIONS
+} from '../actions/Barbecue';
 
-const initialState = {
+export const initialState = {
   name: '',
   model: '',
   description: '',
+  latitude: '',
+  longitude: '',
+  image: '',
 };
 
 const Barbecue = (state = initialState, action) => {
