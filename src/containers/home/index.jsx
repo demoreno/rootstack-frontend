@@ -5,13 +5,22 @@ import HomePropTypes from '../../proptypes/Home.proptypes';
 import Header from '../../components/Header';
 import UserForm from '../../components/UserForm';
 import BarbecueForm from '../../components/BarbecueForm';
+import { setPosition } from '../../actions/Global';
 import './index.scss';
 
 class Home extends Component {
   state = {
-    isOpen: false,
-    typeForm: null,
+    typeForm: '',
   };
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(pos => {
+      this.props.setPosition({
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      });
+    });
+  }
 
   handleButton(typeForm) {
     this.setState({
@@ -38,12 +47,10 @@ class Home extends Component {
             Barbecue
           </Button>
         </Form>
-        ,
         <div className="form-container">
           {typeForm === 'register' && <UserForm />}
           {typeForm === 'barbecue' && <BarbecueForm />}
         </div>
-        ,
       </div>,
     ];
   }
@@ -57,7 +64,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { setPosition };
 
 export default connect(
   mapStateToProps,

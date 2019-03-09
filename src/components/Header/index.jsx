@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { Navbar, Nav, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 class Header extends Component {
+  renderAlert() {
+    const { alert } = this.props;
+
+    return setTimeout(
+      <Alert variant={alert.type}>{alert.message}</Alert>,
+      5000,
+    );
+  }
+
   render() {
     const { alert } = this.props;
     return [
@@ -16,7 +25,7 @@ class Header extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>,
-      <div>{alert && <Alert variant={alert.type}>{alert.message}</Alert>}</div>,
+      <div>{alert && this.renderAlert}</div>,
     ];
   }
 }

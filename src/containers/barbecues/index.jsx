@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { getBarbecues } from '../../actions/Barbecue';
+import { setPosition } from '../../actions/Global';
 import Header from '../../components/Header';
 
 class Barbecues extends Component {
   componentDidMount() {
-    this.props.getBarbecues();
+    navigator.geolocation.getCurrentPosition(pos => {
+      this.props.setPosition({
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      });
+      this.props.getBarbecues(pos.coords.latitude, pos.coords.longitude);
+    });
   }
 
   render() {
@@ -73,11 +80,11 @@ class Barbecues extends Component {
 
 const mapStateToProps = state => {
   return {
-    tweets: state.items,
+    position: state.Global.position,
   };
 };
 
-const mapDispatchToProps = { getBarbecues };
+const mapDispatchToProps = { getBarbecues, setPosition };
 
 export default connect(
   mapStateToProps,

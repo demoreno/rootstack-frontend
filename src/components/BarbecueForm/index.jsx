@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
-import { addUser } from '../../actions/User';
+import { addBarbecue } from '../../actions/Barbecue';
 
 class BarbecueForm extends Component {
   handleChange(e) {
@@ -13,7 +13,7 @@ class BarbecueForm extends Component {
   submitForm() {
     console.log('submit');
     const { name, model, description } = this.state;
-    this.props.addUser({
+    this.props.addBarbecue({
       name,
       model,
       description,
@@ -68,7 +68,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { addUser };
+const mapDispatchToProps = { addBarbecue };
 
 export default connect(
   mapStateToProps,

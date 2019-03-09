@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { addUser } from '../../actions/User';
-import './index.scss';
 
 class UserForm extends Component {
   handleChange(e) {
@@ -12,13 +11,13 @@ class UserForm extends Component {
   }
 
   submitForm() {
-    console.log('submit');
-    const { firstName, lastName, zipCode, email } = this.state;
+    const { firstName, lastName, zipCode, email, password } = this.state;
     this.props.addUser({
       firstName,
       lastName,
       zipCode,
       email,
+      password,
     });
   }
 
@@ -60,9 +59,16 @@ class UserForm extends Component {
             placeholder="Enter email"
             onChange={e => this.handleChange(e)}
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={e => this.handleChange(e)}
+          />
         </Form.Group>
 
         <Button
