@@ -16,19 +16,20 @@ class BarbecueForm extends Component {
   }
 
   submitForm() {
-    const { name, model, description, latitude, longitude } = this.state;
+    const { name, model, description, latitude, longitude, image } = this.state;
     this.props.addBarbecue({
       name,
       model,
       description,
       latitude,
       longitude,
+      image,
     });
     this.setState(initialState);
   }
 
   render() {
-    const { name, model, description, latitude, longitude } = this.state;
+    const { name, model, description, latitude, longitude, image } = this.state;
 
     return (
       <Form>
@@ -78,6 +79,17 @@ class BarbecueForm extends Component {
             name="longitude"
             value={longitude}
             placeholder="Longitud"
+            onChange={e => this.handleChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="image">
+          <Form.Label>URL Image</Form.Label>
+          <Form.Control
+            name="image"
+            value={image}
+            type="text"
+            placeholder="URL Image"
             onChange={e => this.handleChange(e)}
           />
         </Form.Group>

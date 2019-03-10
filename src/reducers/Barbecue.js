@@ -9,6 +9,7 @@ export const initialState = {
   latitude: '',
   longitude: '',
   image: '',
+  barbecues: []
 };
 
 const Barbecue = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const Barbecue = (state = initialState, action) => {
     case ACTIONS.REGISTER_BARBECUE:
       return {
         ...state,
+      };
+    case ACTIONS.GET_BARBECUE:
+      return {
+        ...state,
+        barbecues: action.payload
       };
     default:
       return state;

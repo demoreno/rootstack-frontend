@@ -8,7 +8,7 @@ export default () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/barbecues" component={Barbecues} />
+      <Route exact path="/barbecues/:id?" component={Barbecues} />
       <Route exact path="/my-barbecues" component={MyBarbecues} />
     </Switch>
   </BrowserRouter>

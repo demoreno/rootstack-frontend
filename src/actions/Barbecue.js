@@ -3,6 +3,7 @@ import axios from 'axios';
 export const ACTIONS = {
   REGISTER_BARBECUE: 'REGISTER_BARBECUE',
   CREATE_ALERT: 'CREATE_ALERT',
+  GET_BARBECUE: 'GET_BARBECUE',
 };
 
 export function addBarbecue(data) {
@@ -50,7 +51,10 @@ export function getBarbecues(latitude, longitude) {
         timeout: 10000
       }, )
       .then(response => {
-        console.log(response);
+        dispatch({
+          type: ACTIONS.GET_BARBECUE,
+          payload: response.data.data,
+        });
       })
       .catch(err => {
         dispatch({
